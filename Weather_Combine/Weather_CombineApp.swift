@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-@main
+@main // 앱의 진입점
 struct Weather_CombineApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainWeatherView() // 메인 뷰로 시작
         }
     }
 }

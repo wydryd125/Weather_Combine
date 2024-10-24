@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+extension Double {
+    func getTemperatureString() -> String {
+        return String(format: "%.0f°", self - 273.15)
+    }
+}

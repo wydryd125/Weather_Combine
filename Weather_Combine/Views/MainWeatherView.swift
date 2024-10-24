@@ -5,16 +5,20 @@
 //  Created by wjdyukyung on 10/24/24.
 //
 
-import UIKit
+import SwiftUI
+import Combine
+import MapKit
 
-class MainWeatherView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+struct MainWeatherView: View {
+    @State private var isSearching = false
+    @State private var searchText = ""
+    
+    @ObservedObject private var viewModel = MainWeatherViewModel()
+    
+    var body: some View {
+        NavigationStack {
+            ZStack {
+            }
+        }
     }
-    */
-
 }

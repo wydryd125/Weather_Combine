@@ -5,16 +5,16 @@
 //  Created by wjdyukyung on 10/24/24.
 //
 
-import UIKit
+import SwiftUI
+import Combine
 
 class SearchWeatherView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    var body: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 16) {
+                
+            }
+            Spacer(minLength: 40)
+        }
     }
-    */
-
 }
