@@ -27,12 +27,14 @@ struct SearchWeatherView: View {
         .padding(.horizontal, 16)
         .background(Color.deepBlue)
         .edgesIgnoringSafeArea(.bottom)
-        .gesture(DragGesture().onChanged { _ in
-            isFocused = false
-        })
-        .onTapGesture {
-            UIApplication.shared.endEditing()
-        }
+        .gesture(
+            DragGesture().onChanged { _ in
+                isFocused = false
+            }
+            .simultaneously(with: TapGesture().onEnded {
+                UIApplication.shared.endEditing()
+            })
+        )
         .scrollDismissesKeyboard(.immediately)
     }
     
@@ -50,14 +52,14 @@ struct SearchWeatherView: View {
             
             SearchBar(searchText: $viewModel.searchQuery, isSearching: .constant(true))
                 .focused($isFocused)
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.04) {
-                        isFocused = true
-                    }
-                }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isFocused = true
+            }
         }
     }
-    
+
     private var searchListView: some View {
         LazyVStack(spacing: 8) {
             ForEach(viewModel.filteredCities) { city in

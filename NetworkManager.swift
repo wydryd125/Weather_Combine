@@ -85,6 +85,7 @@ final class NetworkManager {
                     throw NetworkError.decoding
                 }
             }
+            .retry(3)
             .catch { error -> AnyPublisher<Response, Error> in
                 let networkError: NetworkError
                 if let urlError = error as? URLError {
@@ -97,7 +98,7 @@ final class NetworkManager {
                 } else {
                     networkError = .network
                 }
-                print("!!!!! Error \(networkError)")
+                print("!!!!!Error \(networkError)")
                 return Fail(error: networkError).eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()

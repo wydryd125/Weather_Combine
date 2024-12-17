@@ -44,11 +44,14 @@ class WeatherViewModel: ObservableObject {
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
-                if case .failure(let error) = completion {
-                    print("!!! Error: \(error)")
+                guard let self = self else { return }
+                
+                if case .failure(_) = completion {
+                    self.isLoading = false
                 }
             }, receiveValue: { [weak self] weather, forecast in
                 guard let self = self else { return }
+                
                 self.isLoading = false
                 self.weatherData = weather
                 self.weatherForecastData = forecast

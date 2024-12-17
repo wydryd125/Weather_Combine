@@ -19,13 +19,25 @@ struct SearchBar: View {
                     .foregroundColor(.gray)
             }
             
-            TextField("Search", text: $searchText)
-                .focused($isFocuse)
-                .padding(8)
-                .cornerRadius(8)
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .contentShape(Rectangle())
+            TextField("Search", text: $searchText, onEditingChanged: { isEditing in
+                isFocuse = isEditing
+                if !isEditing {
+                    // 포커스가 해제될 때 키보드를 내림
+                    UIApplication.shared.sendAction(
+                        #selector(UIResponder.resignFirstResponder),
+                        to: nil,
+                        from: nil,
+                        for: nil
+                    )
+                }
+            })
+            .id("searchField")
+            .focused($isFocuse)
+            .padding(8)
+            .cornerRadius(8)
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
             
             if !searchText.isEmpty && isFocuse {
                 Button(action: {
