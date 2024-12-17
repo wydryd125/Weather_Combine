@@ -1,5 +1,5 @@
 //
-//  MainWeatherForecastData.swift
+//  WeatherForecastData.swift
 //  Weather_Combine
 //
 //  Created by wjdyukyung on 10/24/24.
@@ -29,7 +29,7 @@ struct KeyPointsData: Identifiable {
 }
 
 // MARK: - 날씨 예보
-struct MainWeatherForecastData: Codable {
+struct WeatherForecastData: Codable {
     let cod: String // 응답 코드
     let message: Int // 메시지
     let cnt: Int // 목록 수
