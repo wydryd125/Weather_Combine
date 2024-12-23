@@ -51,8 +51,8 @@ final class NetworkManager {
             return Fail(error: NetworkError.network("Invalid URL")).eraseToAnyPublisher()
         }
         
-        let apiKeyQueryItem = URLQueryItem(name: "appid", value: "10a177996c09432322a07e4b59cda283")
-        
+        let apiKeyQueryItem = URLQueryItem(name: "appid", value: Bundle.main.apiKey)
+
         if encoding == .url {
             if let parameters = endpoint.parameters {
                 urlComponents.queryItems = (parameters.map {

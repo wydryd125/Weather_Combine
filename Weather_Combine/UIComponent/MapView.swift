@@ -23,7 +23,7 @@ class CustomAnnotation: NSObject, MKAnnotation {
 class CustomAnnotationView: MKAnnotationView {
     override var annotation: MKAnnotation? {
         didSet {
-            guard let customAnnotation = annotation as? CustomAnnotation else { return }
+            guard annotation is CustomAnnotation else { return }
             
             // Callout을 보여줄지 설정
             canShowCallout = true
