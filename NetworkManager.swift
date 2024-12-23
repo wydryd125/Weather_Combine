@@ -19,8 +19,9 @@ enum HTTPMethod: String {
 }
 
 enum NetworkError: Error {
-    case network
+    case network(String)
     case decoding
+    case invalidResponse
 }
 
 final class NetworkManager {
@@ -47,7 +48,7 @@ final class NetworkManager {
         }
         
         guard var urlComponents = URLComponents(string: apiUrl + endpoint.path.stringValue) else {
-            return Fail(error: NetworkError.network).eraseToAnyPublisher()
+            return Fail(error: NetworkError.network("Invalid URL")).eraseToAnyPublisher()
         }
         
         let apiKeyQueryItem = URLQueryItem(name: "appid", value: "10a177996c09432322a07e4b59cda283")
@@ -63,7 +64,7 @@ final class NetworkManager {
         }
         
         guard let url = urlComponents.url else {
-            return Fail(error: NetworkError.network).eraseToAnyPublisher()
+            return Fail(error: NetworkError.network("not components")).eraseToAnyPublisher()
         }
         
         var request = URLRequest(url: url)
@@ -78,7 +79,11 @@ final class NetworkManager {
         }
         
         return session.fetchData(request: request)
-            .tryMap { data in
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                    throw NetworkError.network("!!!Error \(String(describing: response))")
+                }
+                
                 do {
                     return try endpoint.decode(data)
                 } catch {
@@ -91,14 +96,14 @@ final class NetworkManager {
                 if let urlError = error as? URLError {
                     switch urlError.code {
                     case .notConnectedToInternet:
-                        networkError = .network
+                        networkError = .network("not connected")
                     default:
-                        networkError = .network
+                        networkError = .network("!!!Error \(urlError.localizedDescription)")
                     }
                 } else {
-                    networkError = .network
+                    networkError = .network("!!!Error \(error.localizedDescription)")
                 }
-                print("!!!!!Error \(networkError)")
+                print("네트워크 오류: \(networkError)")
                 return Fail(error: networkError).eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
@@ -106,15 +111,15 @@ final class NetworkManager {
 }
 
 extension URLSession {
-    func fetchData(request: URLRequest) -> AnyPublisher<Data, Error> {
+    func fetchData(request: URLRequest) -> AnyPublisher<(Data, URLResponse), Error> {
         return Future { promise in
             let task = self.dataTask(with: request) { data, response, error in
                 if let error = error {
                     promise(.failure(error))
-                } else if let data = data {
-                    promise(.success(data))
+                } else if let data = data, let response = response {
+                    promise(.success((data, response)))
                 } else {
-                    promise(.failure(NetworkError.network))
+                    promise(.failure(NetworkError.network("No Data")))
                 }
             }
             task.resume()

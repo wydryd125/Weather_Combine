@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092932912D19AD4F006B1852 /* WeatherInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 092932902D19AD4F006B1852 /* WeatherInfo.plist */; };
 		093ADF7F2CCA2D0E004EF5BC /* Weather_CombineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093ADF7E2CCA2D0E004EF5BC /* Weather_CombineApp.swift */; };
 		093ADF832CCA2D10004EF5BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 093ADF822CCA2D10004EF5BC /* Assets.xcassets */; };
 		093ADF862CCA2D10004EF5BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 093ADF852CCA2D10004EF5BC /* Preview Assets.xcassets */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		092932902D19AD4F006B1852 /* WeatherInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WeatherInfo.plist; sourceTree = "<group>"; };
 		093ADF7B2CCA2D0E004EF5BC /* Weather_Combine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather_Combine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		093ADF7E2CCA2D0E004EF5BC /* Weather_CombineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_CombineApp.swift; sourceTree = "<group>"; };
 		093ADF822CCA2D10004EF5BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				093ADF842CCA2D10004EF5BC /* Preview Content */,
+				092932902D19AD4F006B1852 /* WeatherInfo.plist */,
 				093ADF7E2CCA2D0E004EF5BC /* Weather_CombineApp.swift */,
 				093ADF822CCA2D10004EF5BC /* Assets.xcassets */,
 				093ADFAD2CCA2E28004EF5BC /* Network */,
@@ -360,6 +363,7 @@
 				093ADF862CCA2D10004EF5BC /* Preview Assets.xcassets in Resources */,
 				093ADF832CCA2D10004EF5BC /* Assets.xcassets in Resources */,
 				09AD8FC82D11872700BF83A0 /* citylist.json in Resources */,
+				092932912D19AD4F006B1852 /* WeatherInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

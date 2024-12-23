@@ -1,0 +1,79 @@
+# Xcode
+
+## User settings
+xcuserdata/
+
+## Build and Derived Data
+build/
+DerivedData/
+
+## Xcode Project Files
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+
+## Compatibility (Older Versions)
+*.xcscmblueprint
+*.xccheckout
+
+## Obj-C/Swift Specific
+*.hmap
+
+## App Packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
+# Packages/
+# Package.pins
+# Package.resolved
+# .swiftpm
+
+# CocoaPods
+# Pods/
+# *.xcworkspace
+
+# Carthage
+Carthage/Build/
+# Carthage/Checkouts
+
+# Accio Dependency Management
+Dependencies/
+.accio/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+OSInjectionProject/
+
+# Logs and Temp Files
+*.log
+*.tmp
+*.bak
+*.orig
+
+# macOS Files
+.DS_Store
+
+# Lock and State Files
+*.swp
+*.lock
+*.xcuserstate
+
+# Ignore WeatherInfo.plist
+WeatherInfo.plist
