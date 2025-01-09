@@ -14,7 +14,7 @@ struct City: Identifiable, Codable {
     let coord: Coordinates
 }
 
-struct Coordinates: Codable {
+struct Coordinates: Codable, Hashable {
     let lon: CGFloat
     let lat: CGFloat
 }

@@ -33,7 +33,7 @@ final class CityRepository {
                 let decoder = JSONDecoder()
                 
                 let cities = try decoder.decode([City].self, from: data)
-                self.cities = cities.filter { $0.name.count > 1 }.sorted { $0.name < $1.name }
+                self.cities = cities.filter { $0.name.count > 1 }.sorted { $0.country < $1.country }
                 promise(.success(self.cities))
             } catch {
                 promise(.failure(error))

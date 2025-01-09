@@ -33,7 +33,7 @@ class WeatherViewModel: ObservableObject {
                     coord = city.coord
                 } else {
                     // 기본 좌표 (서울)
-                    coord = Coordinates(lon: 126.9780, lat: 37.566)
+                    coord = Coordinates(lon: 127.0016, lat: 37.5642)
                 }
                 
                 let weatherPublisher = self.fetchWeather(coord: coord)
