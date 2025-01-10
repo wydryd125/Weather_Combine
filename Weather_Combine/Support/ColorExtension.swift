@@ -22,9 +22,10 @@ extension Color {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
     
-    static let darkGray = Color(red: 108, green: 108, blue: 108)
-    static let lightGray = Color(red: 216, green: 222, blue: 235)
-    static let deepBlue = Color(red: 41, green: 53, blue: 77)
-    static let darkBlue = Color(red: 56, green: 73, blue: 104)
+    static let lightBlue = Color(red: 122, green: 160, blue: 208)
+    static let midBlue = Color(red: 105, green: 140, blue: 199)
+    static let deepBlue = Color(red: 87, green: 124, blue: 183)
+    static let midGrayBlue = Color(red: 179, green: 194, blue: 212)
+    static let lightGrayBlue = Color(red: 199, green: 214, blue: 222)
 }
 

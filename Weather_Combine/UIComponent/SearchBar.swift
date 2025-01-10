@@ -16,19 +16,26 @@ struct SearchBar: View {
         HStack {
             if searchText.isEmpty {
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(.darkGray)
+                    .foregroundColor(.gray)
             }
             
             TextField("Search", text: $searchText, onEditingChanged: { isEditing in
                 isFocuse = isEditing
                 if !isEditing {
-                    hideKeyboard()
+                    // 포커스가 해제될 때 키보드를 내림
+                    UIApplication.shared.sendAction(
+                        #selector(UIResponder.resignFirstResponder),
+                        to: nil,
+                        from: nil,
+                        for: nil
+                    )
                 }
             })
+            .id("searchField")
             .focused($isFocuse)
-            .autocorrectionDisabled(true)
             .padding(8)
             .cornerRadius(8)
+            .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())
             
@@ -37,22 +44,14 @@ struct SearchBar: View {
                     searchText.removeAll()
                 }) {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.darkGray)
+                        .foregroundColor(.gray)
                 }
             }
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 16)
+        .background(Color.midGrayBlue)
         .cornerRadius(10)
-    }
-    
-    // 키보드 내리기 함수
-    private func hideKeyboard() {
-        UIApplication.shared.sendAction(
-            #selector(UIResponder.resignFirstResponder),
-            to: nil,
-            from: nil,
-            for: nil
-        )
+        .shadow(color: Color.midBlue.opacity(0.4), radius: 4, x: 0, y: 2)
     }
 }

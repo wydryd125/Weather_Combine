@@ -21,7 +21,9 @@ struct MainWeatherView: View {
                 if viewModel.isLoading {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
+                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.lightBlue)
                         .edgesIgnoringSafeArea(.all)
                 } else {
                     if let forecastData = viewModel.weatherForecastData,
@@ -39,6 +41,7 @@ struct MainWeatherView: View {
                             Spacer(minLength: 40)
                         }
                         .padding(.horizontal, 16)
+                        .background(Color.lightBlue)
                         .edgesIgnoringSafeArea(.bottom)
                     }
                 }
@@ -49,8 +52,7 @@ struct MainWeatherView: View {
     private var searchBar: some View {
         SearchBar(searchText: $searchText, isSearching: $isSearching)
             .onTapGesture {
-                self.isSearching = true
-                self.searchText.removeAll()
+                isSearching = true
             }
             .navigationDestination(isPresented: $isSearching) {
                 SearchWeatherView(searchText: $searchText, viewModel: CitySearchViewModel(weatherViewModel: viewModel))
@@ -61,27 +63,27 @@ struct MainWeatherView: View {
     
     private func headerView(curDate: WeatherData, data: WeatherForecastData) -> some View {
         VStack() {
-            let cityName = viewModel.selectedCity?.name ?? "서울"
+            let cityName = viewModel.selectedCity?.name ?? "Seoul"
             Text(cityName)
                 .font(.system(size: 40))
-                .foregroundColor(.deepBlue)
+                .foregroundColor(.white)
                 .padding(.top, 32)
             
             Spacer(minLength: 24)
             Text(curDate.main.temp.getTemperatureString())
                 .font(.system(size: 64))
                 .fontWeight(.medium)
-                .foregroundColor(.deepBlue)
+                .foregroundColor(.white)
             
             Spacer()
             Text(curDate.getCurWeather())
                 .font(.system(size: 24))
-                .foregroundColor(.deepBlue)
+                .foregroundColor(.white)
             
             Spacer()
             Text(data.getMinMaxTemperature())
                 .font(.system(size: 16))
-                .foregroundColor(.deepBlue)
+                .foregroundColor(.white)
                 .padding(.bottom, 8)
         }
     }
@@ -90,12 +92,13 @@ struct MainWeatherView: View {
         VStack(spacing: 0) {
             Text("돌풍의 풍속은 최대 " + data.getWindMaxSpeed() + " 입니다.")
                 .font(.subheadline)
-                .foregroundColor(.deepBlue)
+                .foregroundColor(.lightGrayBlue)
                 .padding(.vertical, 8)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.midBlue)
             
             Divider()
-                .foregroundColor(.darkBlue)
+                .background(Color.white)
                 .frame(height: 0.4)
             
             ScrollView(.horizontal, showsIndicators: false) {
@@ -108,7 +111,7 @@ struct MainWeatherView: View {
                         VStack(spacing: 2) {
                             Text(item.date.fullDate().formattedTime())
                                 .font(.subheadline)
-                                .foregroundColor(.deepBlue)
+                                .foregroundColor(.white)
                                 .frame(height: 16)
                             
                             let id = item.weather[0].id
@@ -119,7 +122,7 @@ struct MainWeatherView: View {
                             
                             Text(item.main.temp.getTemperatureString())
                                 .font(.subheadline)
-                                .foregroundColor(.deepBlue)
+                                .foregroundColor(.white)
                                 .frame(height: 16)
                         }
                         .frame(width: 64, height: 84)
@@ -130,23 +133,21 @@ struct MainWeatherView: View {
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 16)
+        .background(Color.midBlue)
         .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.darkBlue, lineWidth: 1)
-        )
     }
     
     private func weekWeatherView(data: WeatherForecastData) -> some View {
         return VStack(spacing: 0) {
             Text("5일간의 일기예보")
                 .font(.subheadline)
-                .foregroundColor(.deepBlue)
+                .foregroundColor(.lightGrayBlue)
                 .padding(.vertical, 8)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.midBlue)
             
             Divider()
-                .foregroundColor(.darkBlue)
+                .background(Color.white)
                 .frame(height: 0.4)
             
             GeometryReader { geometry in
@@ -161,23 +162,23 @@ struct MainWeatherView: View {
                             Text(data.dayOfWeek)
                                 .font(.body)
                                 .frame(width: geometryWidth * 0.3, alignment: .leading)
-                                .foregroundColor(.deepBlue)
+                                .foregroundColor(.white)
                             
                             Text(data.temp.getTemperatureString())
                                 .font(.headline)
                                 .frame(width: geometryWidth * 0.2, alignment: .center)
-                                .foregroundColor(.deepBlue)
+                                .foregroundColor(.white)
                             
                             Text(data.getMinMaxTemperature())
                                 .font(.subheadline)
                                 .frame(width: geometryWidth * 0.5, alignment: .trailing)
-                                .foregroundColor(.deepBlue)
+                                .foregroundColor(.white)
                         }
                         .frame(height: 40)
                         
                         if idx < weatherList.count - 2 {
                             Divider()
-                                .foregroundColor(.darkBlue)
+                                .background(Color.white)
                                 .frame(height: 0.4)
                         }
                     }
@@ -187,11 +188,8 @@ struct MainWeatherView: View {
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 16)
+        .background(Color.midBlue)
         .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.darkBlue, lineWidth: 1)
-        )
     }
     
     func weatherLocationView(data: WeatherData) -> some View {
@@ -199,9 +197,10 @@ struct MainWeatherView: View {
             VStack(spacing: 0) {
                 Text("강수량")
                     .font(.subheadline)
-                    .foregroundColor(.deepBlue)
+                    .foregroundColor(.lightGrayBlue)
                     .padding(.vertical, 8)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.midBlue)
                 
                 MapView(coordinate: CLLocationCoordinate2D(latitude: data.coord.lat,
                                                            longitude: data.coord.lon))
@@ -212,11 +211,8 @@ struct MainWeatherView: View {
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 16)
+        .background(Color.midBlue)
         .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.darkBlue, lineWidth: 1)
-        )
     }
     
     private func weatherKeyPointsView(data: WeatherForecastData) -> some View {
@@ -240,7 +236,7 @@ struct MainWeatherView: View {
                 .font(.subheadline)
                 .frame(width: itemWidth, alignment: .leading)
                 .padding(.leading, 16)
-                .foregroundColor(.deepBlue)
+                .foregroundColor(.white)
             
             Spacer()
             
@@ -248,7 +244,7 @@ struct MainWeatherView: View {
                 .font(.system(size: 32))
                 .frame(width: itemWidth, alignment: .leading)
                 .padding(.leading, 16)
-                .foregroundColor(.deepBlue)
+                .foregroundColor(.white)
             
             Spacer()
             
@@ -257,16 +253,13 @@ struct MainWeatherView: View {
                     .font(.subheadline)
                     .frame(width: itemWidth, alignment: .leading)
                     .padding(.leading, 16)
-                    .foregroundColor(.deepBlue)
+                    .foregroundColor(.white)
             }
         }
         .padding(.vertical, 16)
         .frame(width: itemWidth, height: itemWidth, alignment: .center)
+        .background(Color.midBlue)
         .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.darkBlue, lineWidth: 1)
-        )
     }
 }
 

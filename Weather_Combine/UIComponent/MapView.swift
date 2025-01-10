@@ -74,7 +74,6 @@ struct MapView: UIViewRepresentable {
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
-        mapView.isScrollEnabled = false
         mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: "CustomAnnotation")
         
         let annotation = CustomAnnotation(coordinate: coordinate, title: "위치")
