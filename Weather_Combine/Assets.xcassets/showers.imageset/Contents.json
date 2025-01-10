@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "icons8-rain-cloud-50.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "10d@2x.png",
+      "filename" : "icons8-rain-cloud-50 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "icons8-rain-cloud-100.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

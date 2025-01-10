@@ -62,7 +62,7 @@ struct WeatherForecastData: Codable {
     func getPressure() -> String {
         let pressures = list.map { Double($0.main.pressure) }
         let avePressure = pressures.isEmpty ? 0 : pressures.reduce(0, +) / Double(pressures.count)
-        return String(Int(avePressure)) + "\nhpa"
+        return String(Int(avePressure)) + " hpa"
     }
     
     func getDateWeatherList(date: Date? = Date()) -> [WeatherList] {
@@ -146,12 +146,10 @@ struct WeatherForecastData: Codable {
             return "foggy"
         case 800:
             return "sunny"
-        case 801:
+        case 801, 803, 804:
             return "partly_cloudy"
         case 802:
             return "cloudy"
-        case 803, 804:
-            return "mostly_cloudy"
         default:
             return "sunny"
         }

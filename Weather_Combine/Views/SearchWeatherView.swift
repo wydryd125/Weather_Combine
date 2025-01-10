@@ -25,8 +25,7 @@ struct SearchWeatherView: View {
             Spacer(minLength: 40)
         }
         .padding(.horizontal, 16)
-        .background(Color.deepBlue)
-        .edgesIgnoringSafeArea(.bottom)
+        .padding(.bottom, 16)
         .gesture(
             DragGesture().onChanged { _ in
                 isFocused = false
@@ -46,11 +45,10 @@ struct SearchWeatherView: View {
             }) {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 16))
-                    .foregroundColor(.midGrayBlue)
                     .padding(.trailing, 8)
+                    .foregroundColor(Color.darkGray)
             }
-            
-            SearchBar(searchText: $viewModel.searchQuery, isSearching: .constant(true))
+            SearchBar(searchText: $viewModel.searchQuery, isSearching: .constant(false))
                 .focused($isFocused)
         }
         .onAppear {
@@ -67,24 +65,24 @@ struct SearchWeatherView: View {
                     Text(city.name)
                         .font(.system(size: 16))
                         .fontWeight(.medium)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.deepBlue)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Text(city.country)
                         .font(.subheadline)
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color.deepBlue)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .frame(maxWidth: .infinity)
                 .contentShape(Rectangle())
                 .onTapGesture {
+//                    viewModel.selectCity(city)
+                    viewModel.searchQuery.removeAll()
                     viewModel.selectCity(city)
-                    viewModel.searchQuery = ""
-                    dismiss()
                 }
                 
                 Divider()
-                    .background(Color.white)
+                    .background(Color.darkBlue)
                     .frame(height: 0.4)
             }
         }
